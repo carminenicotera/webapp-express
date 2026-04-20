@@ -1,0 +1,18 @@
+{
+  "name": "webapp-express",
+  "version": "1.0.0",
+  "description": "- Utilizzando il file in allegato, `creiamo un database` con MySQL Workbench\r - Creiamo una `nuova applicazione Express`\r - `Colleghiamo l’app al db` e verifichiamo che tutto funzioni\r - Prepariamo `una rotta index` per ottenere la lista dei film\r - Prepariamo `una rotta show` per ottenere i dettagli di un singolo film e le sue recensioni",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "node --watch --env-file=.env server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
