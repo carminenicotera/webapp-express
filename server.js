@@ -10,6 +10,7 @@ const cors = require('cors')
 const PORT = process.env.PORT || 3000
 
 app.use(express.static('public'))
+app.use(express.json())
 app.use(cors())
 // oppure solo per la frontend
 // app.use(cors({
@@ -26,7 +27,7 @@ app.get('/', (req, res) => {
   })
 })
 
-app.use('/movies', movieRouter)
+app.use('/api/movies', movieRouter)
 
 app.use(notFound)
 app.use(serverError)

@@ -1,5 +1,6 @@
 const connection = require('../database/connection')
 
+// Index
 const index = (req, res) => {
 
   const sql = 'SELECT * FROM movies'
@@ -15,6 +16,7 @@ const index = (req, res) => {
   })
 }
 
+// Show
 const show = (req, res) => {
 
   const sql = 'SELECT * FROM movies WHERE id = ?'
@@ -52,7 +54,28 @@ const show = (req, res) => {
   })
 }
 
+// storeReview
+const storeReview = (req, res) => {
+  const movieId = Number(req.params.id)
+  const { name, vote, text } = req.body
+
+  const sql = 'INSERT INTO reviews (movie_id, name, vote, text) VALUES (?, ?, ?, ?)'
+
+  connection.query(sql, [movieId, name, vote, text], (err, results) => {
+    if (err) {
+      console.error(err)
+      return res.status(500).json({
+        error: 'Database query failed'
+      })
+    }
+    res.status(201).json({
+      message: 'Review created successfully'
+    })
+  })
+}
+
 module.exports = {
   index,
-  show
+  show,
+  storeReview
 }
