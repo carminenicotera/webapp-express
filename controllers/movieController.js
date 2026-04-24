@@ -54,13 +54,32 @@ const show = (req, res) => {
   })
 }
 
+// Create
+const create = (req, res) => {
+  const { title, director, genre, release_year, abstract, image } = req.body
+  const sql = 'INSERT INTO movies (title, director, genre, release_year, abstract, image) VALUES (?, ?, ?, ?, ?, ?)'
+
+  connection.query(sql, [title, director, genre, release_year, abstract, image], (err, results) => {
+    if (err) {
+      console.error(err)
+      return res.status(500).json({
+        error: 'Database query failed'
+      })
+    }
+    res.status(201).json({
+      message: 'Movie created successfully',
+      movieId: results.insertId
+    })
+  })
+}
+
 // storeReview
 const storeReview = (req, res) => {
   const movieId = Number(req.params.id)
   const { name, vote, text } = req.body
 
   // Validazione dei campi richiesti per la recensione
-  if (!name || !vote || !text){
+  if (!name || !vote || !text) {
     return res.status(400).json({
       error: 'Missing required fields: name, vote, text'
     })
@@ -84,5 +103,6 @@ const storeReview = (req, res) => {
 module.exports = {
   index,
   show,
+  create,
   storeReview
 }

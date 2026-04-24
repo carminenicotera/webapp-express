@@ -8,6 +8,9 @@ router.get('/', movieController.index)
 // mostra un film specifico
 router.get('/:id', movieController.show)
 
+// creazione di un nuovo film
+router.post('/', movieController.create)
+
 // creazione di una recensione per un film
 router.post('/:id/review', movieController.storeReview)
 
