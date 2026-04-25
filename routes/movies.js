@@ -11,6 +11,9 @@ router.get('/:id', movieController.show)
 // creazione di un nuovo film
 router.post('/', movieController.create)
 
+// eliminazione di un film
+router.delete('/:id', movieController.destroy)
+
 // creazione di una recensione per un film
 router.post('/:id/review', movieController.storeReview)
 

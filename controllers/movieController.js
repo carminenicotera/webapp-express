@@ -100,9 +100,36 @@ const storeReview = (req, res) => {
   })
 }
 
+// Destroy - Elimina un film dal database
+const destroy = (req, res) => {
+  const id = Number(req.params.id)
+
+  const sql = 'DELETE FROM movies WHERE id = ?'
+
+  connection.query(sql, [id], (err, results) => {
+    if (err) {
+      console.error(err)
+      return res.status(500).json({
+        error: 'Database query failed'
+      })
+    }
+
+    // Se results.affectedRows è 0, significa che l'ID non esisteva
+    if (results.affectedRows === 0) {
+      return res.status(404).json({
+        error: 'Movie not found'
+      })
+    }
+
+    res.sendStatus(204)
+  })
+}
+
+
 module.exports = {
   index,
   show,
   create,
-  storeReview
+  storeReview,
+  destroy
 }
